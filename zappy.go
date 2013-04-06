@@ -17,8 +17,8 @@ Reasons for the fork
 
 The snappy compression is pretty good. Yet it has one problem built into its
 format definition[3] - the maximum length of a copy "instruction" is 64 bytes.
-For specific usage pattern with long runs of repeated data, it turns out the
-compression is suboptimal. For example a 1:1000 "sparseness" 64kB bit index
+For some specific usage patterns with long runs of repeated data, it turns out
+the compression is suboptimal. For example a 1:1000 "sparseness" 64kB bit index
 with only few set bits is compressed to about 3kB (about 1000 of 64B copy, 3
 byte "instructions").
 

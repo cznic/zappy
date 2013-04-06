@@ -185,7 +185,7 @@ func BenchmarkWordsEncode1e6(b *testing.B) { benchWords(b, 1e6, false) }
 
 // testFiles' values are copied directly from
 // https://code.google.com/p/snappy/source/browse/trunk/snappy_unittest.cc.
-// The label field is unused in snappy-go.
+// The label field is unused in zappy.
 var testFiles = []struct {
 	label    string
 	filename string
