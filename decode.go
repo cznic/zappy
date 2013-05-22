@@ -88,9 +88,11 @@ func Decode(dst, src []byte) ([]byte, error) {
 			return nil, ErrCorrupt
 		}
 
-		for ; d < end; d++ {
-			dst[d] = dst[d-offset]
+		for s, v := range dst[d-offset : end-offset] {
+			dst[d+s] = v
 		}
+		d = end
+
 	}
 	if d != dLen {
 		return nil, ErrCorrupt
