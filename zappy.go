@@ -122,7 +122,104 @@ Old=snappy-go, new=zappy:
  Benchmark_ZFlat16             213.32       375.79    1.76x
  Benchmark_ZFlat17             135.37       197.13    1.46x
 
-The package buils with CGO_ENABLED=0 as well, but the performance is worse.
+The package builds with CGO_ENABLED=0 as well, but the performance is worse.
+
+
+ $ CGO_ENABLED=0 go test -test.run=NONE -test.bench=. > old.benchcmp
+ $ CGO_ENABLED=1 go test -test.run=NONE -test.bench=. > new.benchcmp
+ $ benchcmp old.benchcmp new.benchcmp
+ benchmark                  old ns/op    new ns/op    delta
+ BenchmarkWordsDecode1e3         9735         5288  -45.68%
+ BenchmarkWordsDecode1e4       100229        55369  -44.76%
+ BenchmarkWordsDecode1e5      1037611       546420  -47.34%
+ BenchmarkWordsDecode1e6      9559352      5335307  -44.19%
+ BenchmarkWordsEncode1e3        16206         6629  -59.10%
+ BenchmarkWordsEncode1e4       140283        73161  -47.85%
+ BenchmarkWordsEncode1e5      1476657       781756  -47.06%
+ BenchmarkWordsEncode1e6     12702229      6997656  -44.91%
+ Benchmark_UFlat0              397307       221198  -44.33%
+ Benchmark_UFlat1             3890483      2008341  -48.38%
+ Benchmark_UFlat2               35810        15398  -57.00%
+ Benchmark_UFlat3              140850        74194  -47.32%
+ Benchmark_UFlat4              814575       426783  -47.61%
+ Benchmark_UFlat5              156995        81473  -48.10%
+ Benchmark_UFlat6               77645        43161  -44.41%
+ Benchmark_UFlat7               25415        13579  -46.57%
+ Benchmark_UFlat8             6372440      3412916  -46.44%
+ Benchmark_UFlat9             1453679       789956  -45.66%
+ Benchmark_UFlat10            1243146       660747  -46.85%
+ Benchmark_UFlat11            3903493      2146334  -45.02%
+ Benchmark_UFlat12            5106250      2696144  -47.20%
+ Benchmark_UFlat13            1641394       884969  -46.08%
+ Benchmark_UFlat14             262206       131174  -49.97%
+ Benchmark_UFlat15              32325        17047  -47.26%
+ Benchmark_UFlat16             366991       204877  -44.17%
+ Benchmark_UFlat17            1343988       770907  -42.64%
+ Benchmark_ZFlat0              579954       329812  -43.13%
+ Benchmark_ZFlat1             6564692      3504867  -46.61%
+ Benchmark_ZFlat2              902029       513700  -43.05%
+ Benchmark_ZFlat3              678722       384312  -43.38%
+ Benchmark_ZFlat4             1197389       654361  -45.35%
+ Benchmark_ZFlat5              262677       144939  -44.82%
+ Benchmark_ZFlat6              111249        60876  -45.28%
+ Benchmark_ZFlat7               39024        19420  -50.24%
+ Benchmark_ZFlat8             8046106      4387928  -45.47%
+ Benchmark_ZFlat9             2043167      1143139  -44.05%
+ Benchmark_ZFlat10            1781604       980528  -44.96%
+ Benchmark_ZFlat11            5478647      3078585  -43.81%
+ Benchmark_ZFlat12            7245995      3929863  -45.77%
+ Benchmark_ZFlat13            2432529      1371606  -43.61%
+ Benchmark_ZFlat14             420315       227494  -45.88%
+ Benchmark_ZFlat15              52378        26564  -49.28%
+ Benchmark_ZFlat16             567047       316196  -44.24%
+ Benchmark_ZFlat17            1630820       937310  -42.53%
+
+ benchmark                   old MB/s     new MB/s  speedup
+ BenchmarkWordsDecode1e3       102.71       189.08    1.84x
+ BenchmarkWordsDecode1e4        99.77       180.60    1.81x
+ BenchmarkWordsDecode1e5        96.38       183.01    1.90x
+ BenchmarkWordsDecode1e6       104.61       187.43    1.79x
+ BenchmarkWordsEncode1e3        61.70       150.85    2.44x
+ BenchmarkWordsEncode1e4        71.28       136.68    1.92x
+ BenchmarkWordsEncode1e5        67.72       127.92    1.89x
+ BenchmarkWordsEncode1e6        78.73       142.90    1.82x
+ Benchmark_UFlat0              257.73       462.93    1.80x
+ Benchmark_UFlat1              180.46       349.59    1.94x
+ Benchmark_UFlat2             3545.30      8244.61    2.33x
+ Benchmark_UFlat3              669.72      1271.39    1.90x
+ Benchmark_UFlat4              502.84       959.74    1.91x
+ Benchmark_UFlat5              156.71       301.98    1.93x
+ Benchmark_UFlat6              143.60       258.33    1.80x
+ Benchmark_UFlat7              146.41       274.01    1.87x
+ Benchmark_UFlat8              161.59       301.72    1.87x
+ Benchmark_UFlat9              104.62       192.53    1.84x
+ Benchmark_UFlat10             100.70       189.45    1.88x
+ Benchmark_UFlat11             109.33       198.83    1.82x
+ Benchmark_UFlat12              94.37       178.72    1.89x
+ Benchmark_UFlat13             312.67       579.93    1.85x
+ Benchmark_UFlat14             145.84       291.52    2.00x
+ Benchmark_UFlat15             130.77       247.95    1.90x
+ Benchmark_UFlat16             323.14       578.82    1.79x
+ Benchmark_UFlat17             137.14       239.09    1.74x
+ Benchmark_ZFlat0              176.57       310.48    1.76x
+ Benchmark_ZFlat1              106.95       200.32    1.87x
+ Benchmark_ZFlat2              140.75       247.14    1.76x
+ Benchmark_ZFlat3              138.98       245.45    1.77x
+ Benchmark_ZFlat4              342.08       625.95    1.83x
+ Benchmark_ZFlat5               93.66       169.75    1.81x
+ Benchmark_ZFlat6              100.23       183.16    1.83x
+ Benchmark_ZFlat7               95.35       191.60    2.01x
+ Benchmark_ZFlat8              127.98       234.68    1.83x
+ Benchmark_ZFlat9               74.44       133.04    1.79x
+ Benchmark_ZFlat10              70.26       127.66    1.82x
+ Benchmark_ZFlat11              77.89       138.62    1.78x
+ Benchmark_ZFlat12              66.50       122.62    1.84x
+ Benchmark_ZFlat13             210.98       374.17    1.77x
+ Benchmark_ZFlat14              90.98       168.09    1.85x
+ Benchmark_ZFlat15              80.70       159.12    1.97x
+ Benchmark_ZFlat16             209.13       375.04    1.79x
+ Benchmark_ZFlat17             113.02       196.65    1.74x
+ $
 
 Information sources
 
