@@ -76,7 +76,7 @@ func TestSmallCopy(t *testing.T) {
 			for i := 0; i < 32; i++ {
 				s := "aaaa" + strings.Repeat("b", i) + "aaaabbbb"
 				if err := roundtrip([]byte(s), ebuf, dbuf); err != nil {
-					t.Errorf("len(ebuf)=%d, len(dbuf)=%d, i=%d: %v", len(ebuf), len(dbuf), i, err)
+					t.Fatalf("len(ebuf)=%d, len(dbuf)=%d, i=%d: %v", len(ebuf), len(dbuf), i, err)
 				}
 			}
 		}

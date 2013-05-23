@@ -2,7 +2,7 @@ all:
 	go fmt
 	go test -i
 	go test
-	go build
+	go install
 	go vet
 	make todo
 

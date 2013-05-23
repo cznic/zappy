@@ -10,6 +10,8 @@ package zappy
 
 import (
 	"encoding/binary"
+	"fmt"
+	"math"
 )
 
 // We limit how far copy back-references can go, the same as the snappy C++
@@ -37,6 +39,10 @@ func emitCopy(dst []byte, offset, length int) (n int) {
 func Encode(dst, src []byte) ([]byte, error) {
 	if n := MaxEncodedLen(len(src)); len(dst) < n {
 		dst = make([]byte, n)
+	}
+
+	if len(src) > math.MaxUint32 {
+		return nil, fmt.Errorf("zappy.Encode: too long data: %d bytes", len(src))
 	}
 
 	// The block starts with the varint-encoded length of the decompressed bytes.
