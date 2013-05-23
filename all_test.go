@@ -14,7 +14,6 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"log"
 	"math/rand"
 	"net/http"
 	"os"
@@ -32,11 +31,6 @@ var dbg = func(s string, va ...interface{}) {
 	fmt.Printf("%s:%d: ", path.Base(fn), fl)
 	fmt.Printf(s, va...)
 	fmt.Println()
-}
-
-func TODO(s string, args ...interface{}) {
-	_, f, l, _ := runtime.Caller(1)
-	log.Fatalf(fmt.Sprintf("[TODO %s.%d]\n", path.Base(f), l)+s, args...)
 }
 
 func use(...interface{}) {}

@@ -73,54 +73,56 @@ Zappy has better RLE handling (1/1000+1 non zero bytes in each index):
      Sparse bit index   32768 B: snappy    1627, zappy     232, 0.143
      Sparse bit index   65536 B: snappy    3243, zappy     451, 0.139
 
-Zappy _is_ slower than snappy. No profiling was attempted yet. Old=snappy,
-new=zappy:
+When compiled with CGO_ENABLED=1, zappy is now faster than snappy-go.
+Old=snappy-go, new=zappy:
 
-  benchmark                   old MB/s     new MB/s  speedup
-  BenchmarkWordsDecode1e3       147.58       104.54    0.71x
-  BenchmarkWordsDecode1e4       148.82       101.84    0.68x
-  BenchmarkWordsDecode1e5       144.15        96.65    0.67x
-  BenchmarkWordsDecode1e6       165.54       105.35    0.64x
-  BenchmarkWordsEncode1e3        44.87        58.01    1.29x
-  BenchmarkWordsEncode1e4        76.43        68.93    0.90x
-  BenchmarkWordsEncode1e5        74.36        66.07    0.89x
-  BenchmarkWordsEncode1e6        92.48        77.75    0.84x
-  Benchmark_UFlat0              315.39       235.37    0.75x
-  Benchmark_UFlat1              231.21       174.24    0.75x
-  Benchmark_UFlat2             3648.39      3545.97    0.97x
-  Benchmark_UFlat3              888.99       653.00    0.73x
-  Benchmark_UFlat4              314.35       388.09    1.23x
-  Benchmark_UFlat5              210.82       155.55    0.74x
-  Benchmark_UFlat6              210.01       143.97    0.69x
-  Benchmark_UFlat7              209.67       147.15    0.70x
-  Benchmark_UFlat8              246.16       154.36    0.63x
-  Benchmark_UFlat9              162.17       107.38    0.66x
-  Benchmark_UFlat10             154.35       102.46    0.66x
-  Benchmark_UFlat11             168.85       112.04    0.66x
-  Benchmark_UFlat12             146.92        95.42    0.65x
-  Benchmark_UFlat13             358.05       274.91    0.77x
-  Benchmark_UFlat14             196.14       143.42    0.73x
-  Benchmark_UFlat15             185.66       132.46    0.71x
-  Benchmark_UFlat16             361.95       283.05    0.78x
-  Benchmark_UFlat17             221.22       137.61    0.62x
-  Benchmark_ZFlat0              187.55       171.16    0.91x
-  Benchmark_ZFlat1               93.09        99.12    1.06x
-  Benchmark_ZFlat2               67.69        98.88    1.46x
-  Benchmark_ZFlat3               78.10       105.44    1.35x
-  Benchmark_ZFlat4              190.93       336.84    1.76x
-  Benchmark_ZFlat5               97.11        88.57    0.91x
-  Benchmark_ZFlat6              105.53        96.97    0.92x
-  Benchmark_ZFlat7               84.50        89.28    1.06x
-  Benchmark_ZFlat8              151.11       123.57    0.82x
-  Benchmark_ZFlat9               83.27        72.59    0.87x
-  Benchmark_ZFlat10              77.84        67.99    0.87x
-  Benchmark_ZFlat11              87.23        76.18    0.87x
-  Benchmark_ZFlat12              75.02        64.33    0.86x
-  Benchmark_ZFlat13             216.06       202.36    0.94x
-  Benchmark_ZFlat14              93.19        86.37    0.93x
-  Benchmark_ZFlat15              74.34        78.06    1.05x
-  Benchmark_ZFlat16             212.14       203.21    0.96x
-  Benchmark_ZFlat17             134.72       112.39    0.83x
+ benchmark                   old MB/s     new MB/s  speedup
+ BenchmarkWordsDecode1e3       148.98       189.04    1.27x
+ BenchmarkWordsDecode1e4       150.29       182.51    1.21x
+ BenchmarkWordsDecode1e5       145.79       182.95    1.25x
+ BenchmarkWordsDecode1e6       167.43       187.69    1.12x
+ BenchmarkWordsEncode1e3        47.11       145.69    3.09x
+ BenchmarkWordsEncode1e4        81.47       136.50    1.68x
+ BenchmarkWordsEncode1e5        78.86       127.93    1.62x
+ BenchmarkWordsEncode1e6        96.81       142.95    1.48x
+ Benchmark_UFlat0              316.87       463.19    1.46x
+ Benchmark_UFlat1              231.56       350.32    1.51x
+ Benchmark_UFlat2             3656.68      8258.39    2.26x
+ Benchmark_UFlat3              892.56      1270.09    1.42x
+ Benchmark_UFlat4              315.84       959.08    3.04x
+ Benchmark_UFlat5              211.70       301.55    1.42x
+ Benchmark_UFlat6              211.59       258.29    1.22x
+ Benchmark_UFlat7              209.80       272.21    1.30x
+ Benchmark_UFlat8              254.59       301.70    1.19x
+ Benchmark_UFlat9              163.39       192.66    1.18x
+ Benchmark_UFlat10             155.46       189.70    1.22x
+ Benchmark_UFlat11             170.11       198.95    1.17x
+ Benchmark_UFlat12             148.32       178.78    1.21x
+ Benchmark_UFlat13             359.25       579.99    1.61x
+ Benchmark_UFlat14             197.27       291.33    1.48x
+ Benchmark_UFlat15             185.75       248.07    1.34x
+ Benchmark_UFlat16             362.74       582.66    1.61x
+ Benchmark_UFlat17             222.95       240.01    1.08x
+ Benchmark_ZFlat0              188.66       311.89    1.65x
+ Benchmark_ZFlat1              101.46       201.34    1.98x
+ Benchmark_ZFlat2               93.62       244.50    2.61x
+ Benchmark_ZFlat3              102.79       243.34    2.37x
+ Benchmark_ZFlat4              191.64       625.32    3.26x
+ Benchmark_ZFlat5              103.09       169.39    1.64x
+ Benchmark_ZFlat6              110.35       182.57    1.65x
+ Benchmark_ZFlat7               89.56       190.53    2.13x
+ Benchmark_ZFlat8              154.05       235.68    1.53x
+ Benchmark_ZFlat9               87.58       133.51    1.52x
+ Benchmark_ZFlat10              82.08       127.51    1.55x
+ Benchmark_ZFlat11              91.36       138.91    1.52x
+ Benchmark_ZFlat12              79.24       123.02    1.55x
+ Benchmark_ZFlat13             217.04       374.26    1.72x
+ Benchmark_ZFlat14             100.33       168.03    1.67x
+ Benchmark_ZFlat15              80.79       160.46    1.99x
+ Benchmark_ZFlat16             213.32       375.79    1.76x
+ Benchmark_ZFlat17             135.37       197.13    1.46x
+
+The package buils with CGO_ENABLED=0 as well, but the performance is worse.
 
 Information sources
 
