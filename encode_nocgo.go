@@ -25,7 +25,7 @@ func Encode(dst, src []byte) ([]byte, error) {
 		dst = make([]byte, n)
 	}
 
-	if len(src) > math.MaxUint32 {
+	if len(src) > math.MaxInt32 {
 		return nil, fmt.Errorf("zappy.Encode: too long data: %d bytes", len(src))
 	}
 
