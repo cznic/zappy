@@ -41,6 +41,7 @@ func os_exit(n int) {
 
 var (
 	download = flag.Bool("download", false, "If true, download any missing files before running benchmarks")
+	pureGo   = flag.String("purego", "", "verify 'purego' build tag functionality for value `false` or `true`")
 )
 
 func roundtrip(b, ebuf, dbuf []byte) error {
@@ -357,5 +358,25 @@ func TestBitIndex(t *testing.T) {
 
 		nz := len(zenc)
 		t.Logf("Sparse bit index %7d B: snappy %7d, zappy %7d, %.3f", n, ns, nz, float64(nz)/float64(ns))
+	}
+}
+
+func TestPureGo(t *testing.T) {
+	var purego bool
+	switch s := *pureGo; s {
+	case "false":
+		// nop
+	case "true":
+		purego = true
+	default:
+		t.Log("Not performed: %q", s)
+	}
+
+	if g, e := puregoDecode(), purego; g != e {
+		t.Fatal("Decode", g, e)
+	}
+
+	if g, e := puregoEncode(), purego; g != e {
+		t.Fatal("Encode", g, e)
 	}
 }

@@ -6,13 +6,15 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the SNAPPY-GO-LICENSE file.
 
-// +build !cgo
+// +build !cgo purego
 
 package zappy
 
 import (
 	"encoding/binary"
 )
+
+func puregoDecode() bool { return true }
 
 // Decode returns the decoded form of src. The returned slice may be a sub-
 // slice of dst if dst was large enough to hold the entire decoded block.

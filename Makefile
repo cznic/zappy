@@ -1,10 +1,13 @@
-all:
-	go fmt
-	go test -i
-	go test
+all: editor
 	go install
 	go vet
 	make todo
+
+editor:
+	go fmt
+	go test -i
+	#go test
+	./purego.sh
 
 todo:
 	@grep -n ^[[:space:]]*_[[:space:]]*=[[:space:]][[:alnum:]] *.go || true

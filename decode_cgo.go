@@ -6,7 +6,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the SNAPPY-GO-LICENSE file.
 
-// +build cgo
+// +build cgo,!purego
 
 package zappy
 
@@ -87,6 +87,8 @@ int decode(int s, int len_src, uint8_t* src, int len_dst, uint8_t* dst) {
 
 */
 import "C"
+
+func puregoDecode() bool { return false }
 
 // Decode returns the decoded form of src. The returned slice may be a sub-
 // slice of dst if dst was large enough to hold the entire decoded block.
