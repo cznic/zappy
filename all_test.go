@@ -366,6 +366,7 @@ func TestPureGo(t *testing.T) {
 		purego = true
 	default:
 		t.Logf("Not performed: %q", s)
+		return
 	}
 
 	if g, e := puregoDecode(), purego; g != e {
