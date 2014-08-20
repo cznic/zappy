@@ -3,7 +3,7 @@
 # license that can be found in the LICENSE file.
 
 all: editor
-	go vet
+	go tool vet -printfuncs Log:0,Logf:0 .
 	golint .
 	go install
 	make todo
@@ -11,7 +11,7 @@ all: editor
 editor:
 	go fmt
 	go test -i
-	#go test
+	@#go test
 	./purego.sh
 
 todo:
