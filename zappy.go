@@ -10,7 +10,7 @@
 Package zappy implements the zappy block-based compression format.  It aims for
 a combination of good speed and reasonable compression.
 
-Zappy is a format incompatible, API compatible fork of snappy-go[1]. The C++
+Zappy is a format incompatible, API compatible fork of snappy[1]. The C++
 snappy implementation is at [2].
 
 Reasons for the fork
@@ -232,7 +232,7 @@ Information sources
 
 ... referenced from the above documentation.
 
- [1]: http://code.google.com/p/snappy-go/
+ [1]: http://github.com/golang/snappy
  [2]: http://code.google.com/p/snappy/
  [3]: http://code.google.com/p/snappy/source/browse/trunk/format_description.txt
  [4]: http://golang.org/pkg/encoding/binary/
