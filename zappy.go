@@ -73,8 +73,8 @@ Zappy has better RLE handling (1/1000+1 non zero bytes in each index):
      Sparse bit index   32768 B: snappy    1627, zappy     232, 0.143
      Sparse bit index   65536 B: snappy    3243, zappy     451, 0.139
 
-When compiled with CGO_ENABLED=1, zappy is now faster than snappy-go.
-Old=snappy-go, new=zappy:
+When compiled with CGO_ENABLED=1, zappy is now faster than Go snappy.
+Old=Go snappy, new=zappy:
 
  benchmark                   old MB/s     new MB/s  speedup
  BenchmarkWordsDecode1e3       148.98       189.04    1.27x

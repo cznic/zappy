@@ -23,7 +23,7 @@ import (
 	"strings"
 	"testing"
 
-	"code.google.com/p/snappy-go/snappy"
+	"github.com/golang/snappy"
 )
 
 var dbg = func(s string, va ...interface{}) {
@@ -314,11 +314,7 @@ func TestCmp(t *testing.T) {
 		data := readFile2(t, filename)
 		orig := len(data)
 		to += orig
-		senc, err := snappy.Encode(nil, data)
-		if err != nil {
-			t.Fatal(err)
-		}
-
+		senc := snappy.Encode(nil, data)
 		ns := len(senc)
 		zenc, err := Encode(nil, data)
 		if err != nil {
@@ -341,11 +337,7 @@ func TestBitIndex(t *testing.T) {
 			data[rng.Int()%n] = 1
 		}
 
-		senc, err := snappy.Encode(nil, data)
-		if err != nil {
-			t.Fatal(err)
-		}
-
+		senc := snappy.Encode(nil, data)
 		ns := len(senc)
 		zenc, err := Encode(nil, data)
 		if err != nil {
