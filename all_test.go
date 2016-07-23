@@ -35,6 +35,10 @@ var dbg = func(s string, va ...interface{}) {
 
 func use(...interface{}) {}
 
+func init() {
+	use(dbg)
+}
+
 var (
 	download = flag.Bool("download", false, "If true, download any missing files before running benchmarks")
 	pureGo   = flag.String("purego", "", "verify 'purego' build tag functionality for value `false` or `true`")
@@ -367,5 +371,26 @@ func TestPureGo(t *testing.T) {
 
 	if g, e := puregoEncode(), purego; g != e {
 		t.Fatal("Encode", g, e)
+	}
+}
+
+func TestBug5(t *testing.T) { // https://github.com/cznic/zappy/issues/5
+	src, err := ioutil.ReadFile("testdata/zappy_error_src_dump_purego.bin")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	enc, err := Encode(nil, src)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	dec, err := Decode(nil, enc)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if !bytes.Equal(src, dec) {
+		t.Fatal(false)
 	}
 }
